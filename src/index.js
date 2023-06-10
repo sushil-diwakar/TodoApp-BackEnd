@@ -6,7 +6,9 @@ const server = express();
 const PORT = 8000;
 
 const cors = require('cors');
-server.use(cors());
+server.use(cors({
+    origin: "https://todo-frontend-4g5m.onrender.com/"
+}));
 
 //calling db connection function
 Connection.connection();
