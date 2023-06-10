@@ -5,6 +5,9 @@ const notesRouter = require('./routes/notes');
 const server = express();
 const PORT = 8000;
 
+const cors = require('cors');
+server.use(cors());
+
 //calling db connection function
 Connection.connection();
 
