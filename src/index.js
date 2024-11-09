@@ -7,7 +7,7 @@ const PORT = 8000;
 
 const cors = require('cors');
 server.use(cors({
-    origin: "https://todo-frontend-4g5m.onrender.com/"
+    origin: "https://todo-frontend-4g5m.onrender.com"
 }));
 
 //calling db connection function
