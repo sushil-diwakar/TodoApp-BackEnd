@@ -11,9 +11,15 @@ exports.getAllNotes = async (req,res)=>{
     res.json(notes);
 }
 exports.getOneNote = async (req,res)=>{
-    const id = req.params.id;
-    const note = await Notes.find({_id:id});
-    res.json(note[0]);
+    try{
+        const id = req.params.id;
+        const note = await Notes.find({_id:id});
+        if (!note) return res.status(404).json({ error: 'Note not found' });
+        res.status(200).json(note[0]);
+    } catch (err){
+        res.status(500).json({ error: 'Error retrieving the code' });
+    }
+    
 }
 exports.updateNote = async (req,res)=>{
     const id = req.params.id;
