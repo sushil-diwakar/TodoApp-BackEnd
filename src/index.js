@@ -20,6 +20,13 @@ server.use(express.json());
 //Middleware for attaching Router
 server.use('/',notesRouter.router);
 
+// Catch-all route for undefined endpoints
+server.use('*', (req, res) => {
+    res.status(404).json({
+        error: 'Endpoint not found'
+    });
+});
+
 server.listen(PORT,()=>{
     console.log(`Server is listening port ${PORT}`);
 })
