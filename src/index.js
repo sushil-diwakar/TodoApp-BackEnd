@@ -21,9 +21,17 @@ server.use(express.json());
 server.use('/',notesRouter.router);
 
 // Catch-all route for undefined endpoints
-server.use('*', (req, res) => {
-    res.status(404).json({
-        error: 'Endpoint not found'
+server.use((req, res, next) => {
+    const err = new Error('Endpoint not found');
+    err.status = 404;
+    next(err);
+});
+
+// Error handling middleware
+server.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        message: err.message || 'Internal Server Error',
+        status: err.status || 500
     });
 });
 
